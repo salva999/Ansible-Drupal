@@ -1,0 +1,14 @@
+---
+- name: Instalación bind9
+  apt:
+    name: bind9 
+    state: latest
+
+- name: Configurar zona
+  template: src=named.conf.local dest=/etc/bind/named.conf.local
+  notify: restart bind9
+
+- name: Configurar dns
+  template: src=db.drupal.org dest=/var/cache/bind/db.drupal.org
+  notify: restart bind9
+

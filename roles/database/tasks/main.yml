@@ -1,0 +1,16 @@
+---
+- name: Asegurarse que Postgresql esta instalado
+  apt: name={{ item }} state=latest
+  loop:
+    - postgresql
+    - postgresql-contrib
+    - libpq-dev
+    - python-psycopg2
+
+- name: Configuración acceso remoto de cualquier dirección Ip
+  template: src=postgresql.conf dest=/etc/postgresql/9.6/main/postgresql.conf
+  notify: restart postgresql
+
+- name: Configuración acceso local
+  template: src=pg_hba.conf dest=/etc/postgresql/9.6/main/pg_hba.conf
+  notify: restart postgresql

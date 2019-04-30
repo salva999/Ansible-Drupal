@@ -1,0 +1,5 @@
+#Variables para la creación de la base de datos en postgresql
+
+dbname: postgresdb
+dbuser: salva
+dbpassword: 9953

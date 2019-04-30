@@ -1,0 +1,13 @@
+---
+- name: Creacion de base de datos
+  postgresql_db:
+    name: "{{ dbname }}"
+- name: Creacion de usuario
+  postgresql_user:
+    db: "{{ dbname }}"
+    name: "{{ dbuser }}"
+    password: "{{ dbpassword }}"
+    priv: "ALL"
+#- name: Configuración de base de datos
+#command: psql -c "ALTER DATABASE {{ dbname }} SET bytea_output = 'escape';"
+

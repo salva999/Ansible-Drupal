@@ -1,0 +1,31 @@
+---
+- name: Instalación de apache2, PHP y unzip
+  apt: name={{ item }} state=latest
+  loop:
+    - apache2
+    - php7.0
+    - php7.0-pgsql
+    - libapache2-mod-php7.0
+    - php-xml
+    - php-gd
+    - php7.0-mbstring
+    - unzip
+     
+- name: Descomprimir drupal en apache
+  unarchive: src=../files/zip dest=/var/www
+
+- name: Virtualhost
+  template: src=drupal.conf dest=/etc/apache2/sites-available/drupal.conf
+  notify: restart apache2
+
+- name: Dar permisos
+  file: dest=/var/www/drupal-8.6.7 owner=www-data group=www-data mode=0755
+  notify: restart apache2
+
+- name: Activacion del sitio
+  shell: a2ensite drupal.conf
+  notify: restart apache2  
+
+- name: Añadiendo Modulo apache
+  shell: a2enmod rewrite
+  notify: restart apache2

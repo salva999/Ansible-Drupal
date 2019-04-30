@@ -1,0 +1,21 @@
+---
+- name: Descarga y permisos para Drush
+  get_url:
+    url: https://github.com/drush-ops/drush/releases/download/8.1.2/drush.phar
+    dest: /usr/local/bin/drush
+    mode: 0755
+    owner: www-data
+    group: www-data
+
+- name: Instalamos Drush
+  command: >
+    drush si standard -y
+    --db-url=pgsql://{{ dbuser }}:{{ dbpassword }}@10.0.0.20/{{ dbname }}
+    --account-name={{ dbuser }}
+    --account-pass={{ dbpassword }}
+    --site-name="Drupal" 
+    -r /var/www/drupal-8.6.7 -y
+
+- name: Instalación Completa Drupal
+  shell: drush cr -r /var/www/drupal/ 
+  notify: restart apache2
