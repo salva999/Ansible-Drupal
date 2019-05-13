@@ -33,7 +33,6 @@
   file: dest=/var/www/drupal8/sites owner=www-data group=www-data
   notify: restart apache2
 
-
 - name: Instalar drupal8
   command: drush8 site-install standard --db-url=pgsql://{{dbuser}}:{{dbpassword}}@10.0.0.20/{{dbname}} --account-name=admin --account-pass=admin -r /var/www/drupal8/ -y
 
