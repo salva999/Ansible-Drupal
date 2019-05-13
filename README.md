@@ -14,7 +14,7 @@ A continuación comprobamos que tenemos conexión a través de Ansible:
 
 La respuesta debe ser:
 
-10.0.0.20 | SUCCESS => {
+10.0.0.20 | SUCCESS => {<br>
     "changed": false, 
     "ping": "pong"
 }
