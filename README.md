@@ -36,5 +36,5 @@ Accedemos a drupal a través de un navegador web:
 
 <strong>www.drupal8.org</strong>
 
-Usuario: admin<pr>
+Usuario: admin<br>
 Contraseña: admin
