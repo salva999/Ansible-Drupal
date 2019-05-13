@@ -6,23 +6,12 @@ Utilización de máquinas virtuales vagrant
 
 Para iniciar los nodos, ejecutamos el siguiente comando dentro del repositorio:
 
-``vagrant up``
+<strong>``vagrant up``</strong>
 
 A continuación comprobamos que tenemos conexión a través de Ansible:
 
-``ansible all -m ping``
-
-La respuesta a este comando debe ser:
-
-``10.0.0.20 | SUCCESS => {``
-``    "changed": false, ``
-``    "ping": "pong"``
-``}``
-``10.0.0.21 | SUCCESS => {``
-``    "changed": false, ``
-``    "ping": "pong"``
-``}``
+``<strong>ansible all -m ping</strong>``
 
 Para terminar ejecutamos la receta, ejecutando el siguiente parámetro:
 
-``ansible-playbooks site.yml``
+``<strong>ansible-playbooks site.yml</strong>``
