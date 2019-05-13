@@ -1,25 +1,18 @@
 ---
-- name: Instalación de apache2, PHP y unzip
+- name: Instalación de apache2, PHP , unzip y cliente de postgresql
   apt: name={{ item }} state=latest
   loop:
     - apache2
     - php7.0
     - php7.0-pgsql
-    - libapache2-mod-php7.0
-    - php-xml
-    - php-gd
+    - php7.0-gd
     - php7.0-mbstring
     - unzip
-     
-- name: Descomprimir drupal en apache
-  unarchive: src=../files/zip dest=/var/www
+    - php7.0-xml
+    - postgresql-client    
 
 - name: Virtualhost
   template: src=drupal.conf dest=/etc/apache2/sites-available/drupal.conf
-  notify: restart apache2
-
-- name: Dar permisos
-  file: dest=/var/www/drupal-8.6.7 owner=www-data group=www-data mode=0755
   notify: restart apache2
 
 - name: Activacion del sitio

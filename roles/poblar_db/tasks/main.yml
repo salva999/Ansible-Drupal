@@ -8,6 +8,6 @@
     name: "{{ dbuser }}"
     password: "{{ dbpassword }}"
     priv: "ALL"
-#- name: Configuración de base de datos
-#command: psql -c "ALTER DATABASE {{ dbname }} SET bytea_output = 'escape';"
+- name: Configuración de base de datos
+  command: psql -c "ALTER DATABASE {{ dbname }} SET bytea_output = 'escape';"
 

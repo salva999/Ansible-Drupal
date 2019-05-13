@@ -1,21 +1,50 @@
 ---
-- name: Descarga y permisos para Drush
+- name: Descargar Composer
   get_url:
-    url: https://github.com/drush-ops/drush/releases/download/8.1.2/drush.phar
-    dest: /usr/local/bin/drush
+    url: https://getcomposer.org/installer
+    dest: /home/vagrant
     mode: 0755
-    owner: www-data
-    group: www-data
 
-- name: Instalamos Drush
-  command: >
-    drush si standard -y
-    --db-url=pgsql://{{ dbuser }}:{{ dbpassword }}@10.0.0.20/{{ dbname }}
-    --account-name={{ dbuser }}
-    --account-pass={{ dbpassword }}
-    --site-name="Drupal" 
-    -r /var/www/drupal-8.6.7 -y
+- name: Instalar Composer
+  shell: php installer && mv composer.phar /usr/local/bin/composer
 
-- name: Instalación Completa Drupal
-  shell: drush cr -r /var/www/drupal/ 
+- name: Creación directorio drush-8
+  file:
+    path: /usr/local/bin/drush-8
+    state: directory
+
+- name: Instalar drush 8
+  shell: cd /usr/local/bin/drush-8 && composer require drush/drush:8.x
+
+- name: Crear enlace simbólico para drush8
+  file:
+    src: /usr/local/bin/drush-8/vendor/bin/drush
+    dest: /usr/local/bin/drush8
+    state: link
+
+- name: Descargar drupal8
+  shell: drush8 dl --drupal-project-rename=drupal8 -y && cp -r drupal8 /var/www/
+
+- name: Dar permisos
+  file: dest=/var/www/drupal8 owner=www-data group=www-data mode=0755
+  notify: restart apache2
+
+- name: Dar permisos a "sites" de drupal8
+  file: dest=/var/www/drupal8/sites owner=www-data group=www-data
+  notify: restart apache2
+
+
+- name: Instalar drupal8
+  command: drush8 site-install standard --db-url=pgsql://{{dbuser}}:{{dbpassword}}@10.0.0.20/{{dbname}} --account-name=admin --account-pass=admin -r /var/www/drupal8/ -y
+
+- name: Dar permisos a "files" de drupal8
+  file: dest=/var/www/drupal8/sites/default/files owner=www-data group=www-data
+  notify: restart apache2
+
+- name: Deshabilitar la agregación de CSS / JS
+  shell: cd /var/www/drupal8 &&  drush8 -y config-set system.performance css.preprocess 0 && drush8 -y config-set system.performance js.preprocess 0
+  notify: restart apache2
+
+- name: Actualizar caché Drupal
+  shell: drush8 cr -r /var/www/drupal8/
   notify: restart apache2

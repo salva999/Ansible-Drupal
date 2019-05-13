@@ -1,5 +1,5 @@
 ---
-- name: Asegurarse que Postgresql esta instalado
+- name: Instalación Postgresql
   apt: name={{ item }} state=latest
   loop:
     - postgresql
