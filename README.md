@@ -10,8 +10,8 @@ Para iniciar los nodos, ejecutamos el siguiente comando dentro del repositorio:
 
 A continuación comprobamos que tenemos conexión a través de Ansible:
 
-``<strong>ansible all -m ping</strong>``
+<strong>``ansible all -m ping``</strong>`
 
 Para terminar ejecutamos la receta, ejecutando el siguiente parámetro:
 
-``<strong>ansible-playbooks site.yml</strong>``
+<strong>```ansible-playbooks site.yml``</strong>`
