@@ -26,4 +26,4 @@ La respuesta debe ser:
 
 Para terminar ejecutamos la receta, ejecutando el siguiente parámetro:
 
-<strong>``ansible-playbooks site.yml``</strong>
+<strong>``ansible-playbook site.yml``</strong>
