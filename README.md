@@ -27,3 +27,14 @@ La respuesta debe ser:
 Para terminar ejecutamos la receta, ejecutando el siguiente parámetro:
 
 <strong>``ansible-playbook site.yml``</strong>
+
+Añadimos el servidor DNS para que pueda resolver el nombre de dominio, la ip del servidor es:
+
+<strong>10.0.0.20</strong>
+
+Accedemos a drupal a través de un navegador web:
+
+<strong>www.drupal8.org</strong>
+
+Usuario: admin
+Contraseña: admin
