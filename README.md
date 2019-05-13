@@ -15,13 +15,13 @@ A continuación comprobamos que tenemos conexión a través de Ansible:
 La respuesta debe ser:
 
 10.0.0.20 | SUCCESS => {<br>
-    "changed": false, 
-    "ping": "pong"
-}
-10.0.0.21 | SUCCESS => {
-    "changed": false, 
-    "ping": "pong"
-}
+    "changed": false, <br>
+    "ping": "pong"<br>
+}<br>
+10.0.0.21 | SUCCESS => {<br>
+    "changed": false, <br>
+    "ping": "pong"<br>
+}<br>
 
 
 Para terminar ejecutamos la receta, ejecutando el siguiente parámetro:
