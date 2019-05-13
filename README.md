@@ -1,6 +1,6 @@
-Ansible-Drupal
+<h1>Ansible-Drupal</h1>
 
-Receta Ansible para la instalación de drupal
+<h3>Receta Ansible para la instalación de drupal</h3>
 
 Utilización de máquinas virtuales vagrant
 
